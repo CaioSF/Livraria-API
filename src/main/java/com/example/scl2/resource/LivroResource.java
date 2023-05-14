@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/livro")
@@ -21,25 +22,68 @@ public class LivroResource {
     @Autowired
     private LivroRepository livroRepository;
 
+
+
+
     @GetMapping(value = "/list")
     public List<Livro> list() {
         return livroRepository.findAll();
     }
 
-    //@GetMapping(value = "/{genero}")
-    //public List<Livro> list() {
-       // return livroRepository.getByGenero(String genero);
-    //}
+
+    @GetMapping("getById/{id}")
+    public Optional<Livro> getById(@PathVariable(value = "id") int id) {
+        return livroRepository.findById(id);
+    }
+
+
+
+    @GetMapping("/livros/{genero}")
+    public List<Livro> getLivrosPorGenero(@PathVariable String genero) {
+        return livroRepository.buscarLivrosPorGenero(genero);
+    }
+
+
 
     @PostMapping("/create")
     public ResponseEntity<Livro> create(@RequestBody Livro livro) {
         LivroController livroController = new LivroController();
-        if (!livroController.isLivroValido(livro)) {
-            return new ResponseEntity("Dados inválidos", HttpStatus.INTERNAL_SERVER_ERROR);
+
+        if (livroRepository.existsByIsbn(livro.getIsbn())) {
+            return new ResponseEntity("O livro já existe!", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        if (!livroController.isLivroValido(livro)) {
+            return new ResponseEntity("Dados do livro inválidos", HttpStatus.INTERNAL_SERVER_ERROR);
+
+        }
+
+
 
         livro.setDataCadastro(new Date());
         livro = livroRepository.save(livro);
         return new ResponseEntity(livro, HttpStatus.OK);
     }
+
+    @PutMapping("/edit")
+    public ResponseEntity<Livro> editar(@RequestBody Livro livro) {
+        LivroController livroController = new LivroController();
+        if (!livroController.isLivroValido(livro)) {
+            return new ResponseEntity("Nome do livro é inválido", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        livro = livroRepository.save(livro);
+        return new ResponseEntity(livro, HttpStatus.OK);
+    }
+
+    @GetMapping("/total")
+    public long getTotal() {
+        return livroRepository.count();
+    }
+    @DeleteMapping("/remove/{id}")
+    public Livro remove(@PathVariable(value = "id") int id) {
+        Optional<Livro> optionalLivro = livroRepository.findById(id);
+        livroRepository.delete(optionalLivro.get());
+        return optionalLivro.get();
+    }
+
 }

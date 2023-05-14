@@ -3,6 +3,8 @@ package com.example.scl2.dominio;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+
+
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -15,7 +17,9 @@ public class Livro {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(length = 13)
+
+
+    @Column(unique = true)
     private String isbn;
 
 
