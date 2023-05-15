@@ -22,6 +22,7 @@ public class LivroController {
         if ((livro.getNome().isEmpty()) || livro.getNome().length() < 2) {
             return false;
         }
+
         return true;
     }
 
@@ -29,8 +30,9 @@ public class LivroController {
         if (livro.getIsbn().isEmpty()) return false;
         if (livro.getIsbn().length() < 13) return false;
         if (!livro.getIsbn().matches("[0-9]+")) return false;
+        if (!livro.getAutor().matches("^[A-Za-z]+$")) return false;
+        if (!livro.getGenero().matches("^[A-Za-z]+$")) return false;
 
         return true;
     }
-
 }
