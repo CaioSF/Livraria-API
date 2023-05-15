@@ -4,8 +4,9 @@ import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
-
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Entity
@@ -29,11 +30,15 @@ public class Livro {
 
     private String genero;
 
-    @DateTimeFormat(pattern = "dd-mm-yyyy")
+
+
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate dataLancamento;
 
     @DateTimeFormat(pattern = "dd/mm/yyyy HH:mm:ss")
     private Date dataCadastro;
+
+
     public long getId() {
         return id;
     }
