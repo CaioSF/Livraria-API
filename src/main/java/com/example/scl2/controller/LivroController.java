@@ -14,7 +14,7 @@ public class LivroController {
 
 
     public boolean isLivroValido(Livro livro) {
-        return isNomeValido(livro) && isIsbnValida(livro);
+        return isNomeValido(livro) && isIsbnAndCamposValida(livro);
     }
 
 
@@ -26,12 +26,13 @@ public class LivroController {
         return true;
     }
 
-    public boolean isIsbnValida(Livro livro) {
+    public boolean isIsbnAndCamposValida(Livro livro) {
         if (livro.getIsbn().isEmpty()) return false;
         if (livro.getIsbn().length() < 13) return false;
         if (!livro.getIsbn().matches("[0-9]+")) return false;
         if (!livro.getAutor().matches("^[A-Za-z]+$")) return false;
         if (!livro.getGenero().matches("^[A-Za-z]+$")) return false;
+        if (!livro.getNome().matches("^[A-Za-z]+$")) return false;
 
         return true;
     }
