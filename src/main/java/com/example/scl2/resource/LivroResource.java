@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/livro")
+@CrossOrigin(origins = "http://127.0.0.1:3000")
 
 
 public class LivroResource {

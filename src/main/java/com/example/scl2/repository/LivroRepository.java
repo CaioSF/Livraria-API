@@ -13,7 +13,8 @@ public interface LivroRepository extends JpaRepository<Livro, Integer> {
     List<Livro> buscarLivrosPorGenero(@Param("genero") String genero);
 
 
-    boolean existsByIsbn(String nome);
+    boolean existsByIsbn(String isbn);
+
 
 
 }

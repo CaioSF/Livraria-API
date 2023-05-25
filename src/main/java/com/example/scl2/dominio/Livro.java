@@ -30,6 +30,12 @@ public class Livro {
 
     private String genero;
 
+    private String idioma;
+
+    private Integer numeroPaginas;
+
+    private String editora;
+
 
 
     @DateTimeFormat(pattern = "yyyy/MM/dd")
@@ -94,6 +100,31 @@ public class Livro {
     public void setDataCadastro(Date dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
+
+    public String getIdioma() {
+        return idioma;
+    }
+
+    public void setIdioma(String idioma) {
+        this.idioma = idioma;
+    }
+
+    public Integer getNumeroPaginas() {
+        return numeroPaginas;
+    }
+
+    public void setNumeroPaginas(Integer numeroPaginas) {
+        this.numeroPaginas = numeroPaginas;
+    }
+
+    public String getEditora() {
+        return editora;
+    }
+
+    public void setEditora(String editora) {
+        this.editora = editora;
+    }
 }
+
 
 
