@@ -67,12 +67,17 @@ public class LivroResource {
         return new ResponseEntity(livro, HttpStatus.OK);
     }
 
-    @PutMapping("/edit")
-    public ResponseEntity<Livro> editar(@RequestBody Livro livro) {
+    @PutMapping("/edit/{isbn}")
+    public ResponseEntity<Livro> editar(@PathVariable("isbn") String isbn, @RequestBody Livro livro) {
         LivroController livroController = new LivroController();
         if (!livroController.isLivroValido(livro)) {
             return new ResponseEntity("Nome do livro é inválido", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
+        if (!isbn.equals(livro.getIsbn())) {
+            return new ResponseEntity("O isbn do livro deve ser mantido!", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
 
         livro = livroRepository.save(livro);
         return new ResponseEntity(livro, HttpStatus.OK);
