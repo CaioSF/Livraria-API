@@ -8,7 +8,7 @@ Editar livro: Permite atualizar as informações de um livro existente no sistem
 Apagar livro: Remove um livro do sistema.
 
 
-*EM desenvolvimento*
+
 Autenticação
 Para as operações de edição e adição de livros, é necessário que o usuário esteja autenticado. A autenticação pode ser feita por meio de um processo de login, que pode ser implementado utilizando JWT (JSON Web Tokens), por exemplo. Após a autenticação, o usuário recebe um token que deve ser enviado nas requisições para as operações protegidas.
 
