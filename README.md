@@ -25,4 +25,5 @@ Clone este repositório para o seu ambiente de desenvolvimento.
 Importe o projeto em sua IDE favorita.
 Configure as dependências e o arquivo de configuração do banco de dados.
 Execute o projeto Spring Boot para iniciar o backend.
+Link para o frontend https://github.com/CaioSF/LivrariaFront
 Abra o arquivo index.html no seu navegador para acessar o frontend.
