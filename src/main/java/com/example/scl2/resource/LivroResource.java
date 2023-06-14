@@ -27,12 +27,16 @@ public class LivroResource {
 
 
     @GetMapping(value = "/list")
+    @CrossOrigin(origins = "http://127.0.0.1:3000")
+
     public List<Livro> list() {
         return livroRepository.findAll();
     }
 
 
     @GetMapping("getById/{id}")
+    @CrossOrigin(origins = "http://127.0.0.1:3000")
+
     public Optional<Livro> getById(@PathVariable(value = "id") int id) {
         return livroRepository.findById(id);
     }
@@ -40,6 +44,8 @@ public class LivroResource {
 
 
     @GetMapping("/livros/{genero}")
+    @CrossOrigin(origins = "http://127.0.0.1:3000")
+
     public List<Livro> getLivrosPorGenero(@PathVariable String genero) {
         return livroRepository.buscarLivrosPorGenero(genero);
     }
@@ -49,6 +55,9 @@ public class LivroResource {
 
 
     @PostMapping("/create")
+    @CrossOrigin(origins = "http://127.0.0.1:3000")
+
+
     public ResponseEntity<Livro> create(@RequestBody Livro livro) {
         LivroController livroController = new LivroController();
 
@@ -67,27 +76,46 @@ public class LivroResource {
         return new ResponseEntity(livro, HttpStatus.OK);
     }
 
-    @PutMapping("/edit/{isbn}")
-    public ResponseEntity<Livro> editar(@PathVariable("isbn") String isbn, @RequestBody Livro livro) {
+    @PutMapping("/edit")
+
+    public ResponseEntity<Livro> editar(@RequestBody Livro livro) {
         LivroController livroController = new LivroController();
         if (!livroController.isLivroValido(livro)) {
             return new ResponseEntity("Nome do livro é inválido", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        if (!isbn.equals(livro.getIsbn())) {
-            return new ResponseEntity("O isbn do livro deve ser mantido!", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-
         livro = livroRepository.save(livro);
         return new ResponseEntity(livro, HttpStatus.OK);
     }
 
+//    @PutMapping("/edit/{isbn}")
+//
+//
+//    public ResponseEntity<Livro> editar( @PathVariable(value = "isbn") String isbn,@RequestBody Livro livro) {
+//        LivroController livroController = new LivroController();
+//        if (!livroController.isLivroValido(livro)) {
+//            return new ResponseEntity("Nome do livro é inválido", HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//
+//        if (!isbn.equals(livro.getIsbn())) {
+//            return new ResponseEntity("O isbn do livro deve ser mantido!", HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//
+//
+//
+//        livro = livroRepository.save(livro);
+//        return new ResponseEntity(livro, HttpStatus.OK);
+//    }
+
     @GetMapping("/total")
+    @CrossOrigin(origins = "http://127.0.0.1:3000")
+
     public long getTotal() {
         return livroRepository.count();
     }
     @DeleteMapping("/remove/{id}")
+    @CrossOrigin(origins = "http://127.0.0.1:3000")
+
     public Livro remove(@PathVariable(value = "id") int id) {
         Optional<Livro> optionalLivro = livroRepository.findById(id);
         livroRepository.delete(optionalLivro.get());
